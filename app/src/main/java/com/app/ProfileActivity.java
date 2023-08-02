@@ -37,14 +37,14 @@ import com.squareup.picasso.Picasso;
 public class ProfileActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
-    TextView nameM, emailM, cardMail, forgotPassword, gender;
+    public static TextView nameM, emailM, cardMail, forgotPassword, gender;
     FirebaseFirestore db;
     FirebaseUser user;
     FirebaseStorage storage;
     ImageView pp, btnPp, logOut;
     ProgressBar progressBar;
 
-    public String Email;
+    public static String Email;
     public StorageReference storageRef;
     public UploadTask uploadTask;
 

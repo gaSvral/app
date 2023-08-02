@@ -21,7 +21,7 @@ public class IntroActivity extends AppCompatActivity {
         setContentView(R.layout.activity_intro);
 
         if (user != null) {
-            Intent intent = new Intent(IntroActivity.this, ProfileActivity.class);
+            Intent intent = new Intent(IntroActivity.this, MainActivity.class);
             startActivity(intent);
             finish();
         }
