@@ -1,17 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn = "navigation_view">
 
-    <item
-        android:id="@+id/Profile"
-        android:title="Profile"/>
-    <item
-        android:id="@+id/settings"
-        android:title="Settings"/>
-    <item
-        android:id="@+id/Log_Out"
-        android:title="Log Out"/>
-    <item
-        android:id="@+id/Devoloper"
-        android:title="Devoloper"/>
+    <group>
+        <item
+            android:id="@+id/Profile"
+            android:title="Profile"
+            android:icon="@drawable/baseline_person_24"/>
+        <item
+            android:id="@+id/settings"
+            android:title="Settings"
+            android:icon="@drawable/settings"/>
+        <item
+            android:id="@+id/Log_Out"
+            android:title="Log Out"
+            android:icon="@drawable/log_out"/>
+        <item
+            android:id="@+id/Devoloper"
+            android:title="Devoloper"
+            android:icon="@drawable/yoga_icon_removebg"/>
+    </group>
 
 </menu>

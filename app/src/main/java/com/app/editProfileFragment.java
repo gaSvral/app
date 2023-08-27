@@ -82,7 +82,7 @@ public class editProfileFragment extends Fragment {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()){
-                            Toast.makeText(getActivity(),"succes",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(),"auth mail changed",Toast.LENGTH_SHORT).show();
                             Log.d(TAG,"Email değiştirildi");
 
                             FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -95,19 +95,22 @@ public class editProfileFragment extends Fragment {
                                             // Mevcut dokümanın verilerini alın
                                             Map<String, Object> data = documentSnapshot.getData();
                                             data.put("Email", value);
+                                            Log.d(TAG ,data.toString());
 
-                                            // Yeni dokümanı oluşturmak için eski dokümanı silin
+                                            //eski dokümanı silin
+                                            db.collection(collectionPath).document(oldDocumentId).delete()
+                                                    .addOnSuccessListener(aVoid1 -> {
+                                                        // Doküman başarıyla silindi
+                                                    })
+                                                    .addOnFailureListener(e -> {
+                                                        Toast.makeText(getActivity(),"Doküman silinirken bir hata oluştu", Toast.LENGTH_SHORT).show();
+                                                    });
+
+                                            // Yeni dokümanı oluşturun
                                             String newDocumentId = value;
                                             db.collection(collectionPath).document(newDocumentId).set(data)
                                                     .addOnSuccessListener(aVoid -> {
-                                                        // Yeni doküman başarıyla oluşturuldu, şimdi eski dokümanı silin
-                                                        db.collection(collectionPath).document(oldDocumentId).delete()
-                                                                .addOnSuccessListener(aVoid1 -> {
-                                                                    // Doküman başarıyla silindi
-                                                                })
-                                                                .addOnFailureListener(e -> {
-                                                                    Toast.makeText(getActivity(),"Doküman silinirken bir hata oluştu", Toast.LENGTH_SHORT).show();
-                                                                });
+                                                        Log.d(TAG,"New document has succesfuly registered");
                                                     })
                                                     .addOnFailureListener(e -> {
                                                         Toast.makeText(getActivity(),"Yeni doküman oluşturulurken bir hata oluştu", Toast.LENGTH_SHORT).show();

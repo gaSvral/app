@@ -5,44 +5,44 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     public DrawerLayout drawerLayout;
     public ActionBarDrawerToggle actionBarDrawerToggle;
+
+    public static String SELECTED_POSE;
+
+    private Button btnStart, btnProfile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        // drawer layout instance to toggle the menu icon to open
-        // drawer and back button to close drawer
-        drawerLayout = findViewById(R.id.drawer_layout);
-        actionBarDrawerToggle = new ActionBarDrawerToggle(this,drawerLayout,R.string.nav_open,R.string.nav_close);
-
-        // pass the Open and Close toggle for the drawer layout listener
-        // to toggle the button
-        drawerLayout.addDrawerListener(actionBarDrawerToggle);
-        actionBarDrawerToggle.syncState();
-        //getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        btnStart = findViewById(R.id.btnStart);
+        btnProfile = findViewById(R.id.button_gecici);
 
 
         Spinner spinner = findViewById(R.id.spinner);
         List<String> options = new ArrayList<>();
-        options.add("Warrior2");
-        options.add("Plank");
-        options.add("Split Pose");
-        options.add("Downdog");
-        options.add("Goddess");
-        options.add("Tree");
+        options.add("warrior2");
+        options.add("plank");
+        options.add("Split_Pose");
+        options.add("downdog");
+        options.add("goddess");
+        options.add("tree");
         options.add("AkarnaDhanurasana");
 
         // Creating adapter for spinner
@@ -51,15 +51,39 @@ public class MainActivity extends AppCompatActivity {
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // attaching data adapter to spinner
         spinner.setAdapter(dataAdapter);
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                SELECTED_POSE = parent.getItemAtPosition(position).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        btnStart.setOnClickListener(this);
+        btnProfile.setOnClickListener(this);
     }
 
+
     @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+    public void onClick(View v) {
+        switch (v.getId()){
 
-        if (actionBarDrawerToggle.onOptionsItemSelected(item)){
-            return true;
+            case R.id.btnStart:
+                Intent intent = new Intent(MainActivity.this,LivePreviewActivity.class);
+                startActivity(intent);
+                finish();
+                break;
+
+            case R.id.button_gecici:
+                Intent intent2 = new Intent(MainActivity.this,ProfileActivity.class);
+                startActivity(intent2);
+                break;
+
         }
-
-        return super.onOptionsItemSelected(item);
     }
 }
