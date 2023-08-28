@@ -28,6 +28,9 @@ YOGAI is an AI-powered android real time yoga tracking app and uses ML Kit Pose 
 ## Create Firebase console
 * check this documentation https://firebase.google.com/docs/android/setup
 
+### Download APK
+https://drive.google.com/file/d/1Zop4fjCbkBBgWcaXd2anaeW29Mu1QoqM/view?usp=drive_link
+
 
 ## Contributing
 
